@@ -1,10 +1,3 @@
-#<< utils
-#<< tasksList
-#<< tasksListBackend
-#<< tasksListOrdering
-#<< gui
-#<< glue
-
 class App
   constructor: ->
     useCase = new TasksList()
@@ -14,6 +7,3 @@ class App
     glue = new Glue(useCase, gui, tasksBackend, tasksOrdering)
 
     useCase.start()
-
-new App()
-

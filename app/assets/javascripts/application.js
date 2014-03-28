@@ -11,8 +11,8 @@
 // about supported directives.
 //
 //= require jquery
-//= require sugar.min
-//= require handlebars
-//= require YouAreDaChef
-//= require YouAreDaBomb
+//= require ../../../vendor/assets/javascripts/underscore
+//= require_tree ../../../vendor/assets/javascripts/
 //= require app
+
+new App()c
