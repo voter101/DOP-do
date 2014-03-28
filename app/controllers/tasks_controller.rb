@@ -5,7 +5,7 @@ class TasksController < ApplicationController
   end
 
   def show
-
+    render json: Task.find()
   end
 
   private def task_service
