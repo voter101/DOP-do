@@ -11,6 +11,8 @@
 // about supported directives.
 //
 //= require jquery
-//= require jquery_ujs
-//= require turbolinks
-//= require_tree .
+//= require sugar.min
+//= require handlebars
+//= require YouAreDaChef
+//= require YouAreDaBomb
+//= require app
