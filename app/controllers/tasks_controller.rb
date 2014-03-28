@@ -5,10 +5,11 @@ class TasksController < ApplicationController
   end
 
   def show
-    render json: Task.find()
+    render :json => Task.all
   end
 
-  private def task_service
+  private
+  def task_service
     TasksService.new(current_user)
   end
 
