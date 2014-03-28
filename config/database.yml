@@ -23,7 +23,7 @@ development:
 test:
   adapter: mysql2
   encoding: utf8
-  database: dop-do-test
+  database: dop-do
   pool: 5
   username: root
   password: toor
