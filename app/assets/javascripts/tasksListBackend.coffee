@@ -26,7 +26,7 @@ class @TasksListBackend
       @noPickedTasks()
 
   markPickedTaskDone: () =>
-    request = $.ajax '/task/done',
+    request = $.ajax '/tasks/done',
       'type': 'PUT'
     request.done  =>
       @markedPickedDone()
