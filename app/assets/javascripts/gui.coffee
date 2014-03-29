@@ -23,6 +23,7 @@ class @Gui
     $('.taskForm button').click( -> $('.taskForm').trigger('submit') )
     $('.tasksList').on('click', '.removeTask', @removeTaskClick)
     $('.taskPicker').on('click', '.taskDone', @taskDoneClick)
+    $('.taskPicker').on('click', '.pickTask', @pickTaskClick)
 
   setTasks: (tasks) =>
     $('.tasksList').empty()
@@ -59,6 +60,9 @@ class @Gui
 
   taskDoneClick: (event) =>
     @taskDoneClicked()
+
+  pickTaskClick: (event) =>
+    @pickTaskClicked()
 
   taskDoneClicked: () =>
 
