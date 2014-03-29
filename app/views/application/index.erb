@@ -17,7 +17,7 @@
 </script>
 
 <script type="x-handlebars-template" id="TasksListEmpty">
-    <div class="lead">No more tasks to pick. :)</div>
+    <div class="heading">No more tasks to pick. :)</div>
 </script>
 
 <script type="x-handlebars-template" id="TaskForm">
@@ -35,6 +35,7 @@
 </script>
 
 <script type="x-handlebars-template" id="TaskPicked">
+    <div class="heading">Currently picked task:</div>
     <div data-taskId="{{id}}" class="task list-group-item">
         <span class="taskId">#{{id}}</span>
         <span class="taskDescription">{{content}}</span>
