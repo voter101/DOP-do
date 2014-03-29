@@ -3,6 +3,7 @@ class TasksService
   class TaskSaveError < StandardError; end
   class TaskNotFoundError < StandardError; end
   class TaskDestroyError < StandardError; end
+  class TaskAlreadyPickedError < StandardError; end
 
   attr_reader :user
 
@@ -43,9 +44,10 @@ class TasksService
   end
 
   def pick()
-    picked = getPicked()
-    if !getPicked.nil?
-      return picked
+    begin
+      pickedTask = getPicked()
+      return pickedTask
+    rescue TaskAlreadyPickedError
     end
 
     task = Task.first
@@ -56,7 +58,10 @@ class TasksService
   end
 
   def getPicked()
-    return Task.where(picked_by: @user.id)
+    task = Task.where(picked_by: @user.id)
+    if task.nil?
+      raise TaskAlreadyPickedError.new
+    end
   end
 
 end
