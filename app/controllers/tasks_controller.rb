@@ -39,6 +39,15 @@ class TasksController < ApplicationController
     render :json => task_service.pick()
   end
 
+  def getPicked
+    begin
+      task = task_service.getPicked()
+      render :json => task
+    rescue TasksService::TaskNotPickedError
+      render status: :not_found, :nothing => true
+    end
+  end
+
   private
   def task_service
     TasksService.new(current_user)
