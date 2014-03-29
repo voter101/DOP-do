@@ -3,7 +3,6 @@ class TasksService
   class TaskSaveError < StandardError; end
   class TaskNotFoundError < StandardError; end
   class TaskDestroyError < StandardError; end
-  class TaskAlreadyPickedError < StandardError; end
 
   attr_reader :user
 
@@ -32,7 +31,7 @@ class TasksService
   end
 
   def getAll()
-    Task.all
+    Task.where("picked_by IS NULL")
   end
 
   def destroy(id)
@@ -44,7 +43,9 @@ class TasksService
   end
 
   def pickTask()
-    raise TaskAlreadyPickedError.new if taskPicked?
+    if taskPicked?
+      return Task.where(picked_by: @user.id)
+    end
 
     task = Task.first
     task.with_lock do
