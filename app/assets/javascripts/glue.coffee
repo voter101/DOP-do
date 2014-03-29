@@ -1,6 +1,6 @@
 class @Glue
   constructor: (@useCase, @gui, @tasksBackend)->
-    After(@useCase, "start", () => @gui.showTaskList())
+    After(@useCase, "start", () => @gui.showTasksUI())
     After(@useCase, "start", () => @tasksBackend.fetchTasks())
 
     After(@useCase, "tasksSetted", (tasks) => @gui.setTasks(tasks))

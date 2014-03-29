@@ -7,7 +7,7 @@ class @Gui
     html = template(data)
     element = $(html)
 
-  showTaskList: () =>
+  showTasksUI: () =>
     tasks = @createElementFor("#Tasks")
     taskPicker = @createElementFor("#TaskPicker")
     list = @createElementFor("#TasksListTemplate")
