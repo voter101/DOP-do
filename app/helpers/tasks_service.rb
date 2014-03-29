@@ -33,7 +33,7 @@ class TasksService
   end
 
   def getAll()
-    Task.where(picked_by: nil, done: 0)
+    Task.where(picked_by: nil, done: false)
   end
 
   def destroy(id)
@@ -62,12 +62,12 @@ class TasksService
 
   def markPickedAsDone()
     pickedTask = getPicked()
-    pickedTask.done = 1
+    pickedTask.done = true
     pickedTask.save
   end
 
   def getPicked()
-    task = Task.where(picked_by: @user.id, done: 0).first
+    task = Task.where(picked_by: @user.id, done: false).first
     if task.nil?
       raise TaskNotPickedError.new
     end
