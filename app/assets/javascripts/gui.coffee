@@ -27,7 +27,7 @@ class @Gui
     $('.tasksList').append(element)
 
   removeTask: (id) =>
-    $('.tasksList .task[data-taskId=' + id + ']').slideDown()
+    $('.tasksList .task[data-taskId=' + id + ']').slideUp()
 
   removeTaskClick: (event) =>
     id = $(event.target).attr('data-taskId')
