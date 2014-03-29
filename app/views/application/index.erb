@@ -25,8 +25,8 @@
     </form>
 </script>
 
-<script type="x-handlebars-template" id="TaskPicker">
-    <div class="taskPicker">
+<script type="x-handlebars-template" id="TaskPick">
+    <div class="taskPick">
     </div>
 </script>
 
@@ -35,5 +35,12 @@
         <span class="taskId">#{{id}}</span>
         <span class="taskDescription">{{content}}</span>
         <span class="badge taskDone">Done</span>
+    </div>
+</script>
+
+<script type="x-handlebars-template" id="TaskPicker">
+    <div class="task list-group-item">
+        <span class="taskDescription">Pick a task</span>
+        <span class="badge taskDone">For the win!</span>
     </div>
 </script>
