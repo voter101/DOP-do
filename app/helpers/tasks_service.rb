@@ -55,6 +55,12 @@ class TasksService
     return task
   end
 
+  def markPickedAsDone()
+    pickedTask = getPicked()
+    pickedTask.done = 1
+    pickedTask.save
+  end
+
   def getPicked()
     task = Task.where(picked_by: @user.id, done: 0)
     if task.empty?
