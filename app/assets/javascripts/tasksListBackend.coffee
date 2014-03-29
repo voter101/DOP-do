@@ -4,15 +4,15 @@ class @TasksListBackend
     @tasks = []
 
   getTasks: =>
-    request = $.ajax '/tasks.json',
-      dataType: 'json',
-      type: 'GET',
+    request = $.get '/tasks.json',
+      dataType: 'json'
     request.success (data) =>
       @tasks = data
       @tasksFetched @tasks
 
   addTask: (content) =>
-    task = {id: 3, content: content}
+    request = $.post '/tasks.json',
+      'data': {content: content}
     @tasks.add(task);
     @taskAdded task
 
