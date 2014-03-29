@@ -1,4 +1,5 @@
 DOPDo::Application.routes.draw do
+  devise_for :users
   root 'application#index'
   get '/tasks', to: 'tasks#show'
   get '/tasks/:id', to: 'tasks#showItem'
