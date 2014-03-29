@@ -31,6 +31,12 @@ class @TasksListBackend
     request.done  =>
       @markedPickedDone()
 
+  pickTask: () =>
+    request = $.get '/tasks/pick',
+      'dataType': 'json'
+    request.success (data) =>
+      @taskPicked task
+
   taskAdded: () =>
 
   tasksFetched: (tasks) =>
@@ -42,3 +48,5 @@ class @TasksListBackend
   noPickedTasks: () =>
 
   markedPickedDone: () =>
+
+  taskPicked: (task) =>
