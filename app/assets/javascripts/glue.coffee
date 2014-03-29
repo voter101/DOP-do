@@ -17,4 +17,3 @@ class @Glue
     LogAll(@gui)
     LogAll(@tasksBackend)
     LogAll(@tasksOrdering)
-
