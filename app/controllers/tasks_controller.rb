@@ -28,6 +28,7 @@ class TasksController < ApplicationController
   def destroy
     begin
       task_service.destroy(params[:id])
+      render status: :ok, :nothing => true
     rescue TaskDestroyError
       render status: :forbidden, :nothing => true
     end
