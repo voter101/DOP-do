@@ -10,12 +10,13 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+
 //= require jquery
 //= require ../../../vendor/assets/javascripts/handlebars
 //= require ../../../vendor/assets/javascripts/underscore
 //= require ../../../vendor/assets/javascripts/YouAreDaChef
 //= require ../../../vendor/assets/javascripts/YouAreDaBomb
-//= require_tree .
 //= require_tree ../../../vendor/assets/javascripts/
+//= require_tree .
 
 new App();

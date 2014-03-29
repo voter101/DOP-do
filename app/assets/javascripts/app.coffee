@@ -1,4 +1,4 @@
-class App
+class @App
   constructor: ->
     useCase = new TasksList()
     gui = new Gui()

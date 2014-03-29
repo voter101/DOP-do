@@ -1,4 +1,4 @@
-class Glue
+class @Glue
   constructor: (@useCase, @gui, @tasksBackend, @tasksOrdering)->
     After(@useCase, "start", => @gui.showTaskList())
     After(@useCase, "start", => @tasksBackend.getTasks())

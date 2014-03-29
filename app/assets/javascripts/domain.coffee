@@ -1,2 +1,2 @@
-class Task
+class @Task
   constructor: (@id, @content) ->

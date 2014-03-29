@@ -1,4 +1,4 @@
-class TasksList
+class @TasksList
   constructor: ->
     @tasks = []
 
