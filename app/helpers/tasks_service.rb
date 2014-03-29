@@ -1,6 +1,7 @@
 class TasksService
   class TaskContentTooLongError < StandardError; end
   class TaskSaveError < StandardError; end
+  class TaskDestroyError < StandardError; end
 
   #attr_reader :user
 
@@ -18,6 +19,14 @@ class TasksService
 
     if !task.save
       raise TaskSaveError.new
+    end
+  end
+
+  def delete(id)
+    task = Task.find(id)
+    task.destroy()
+    if !task.destroyed?
+      raise TaskDestroyError
     end
   end
 end
