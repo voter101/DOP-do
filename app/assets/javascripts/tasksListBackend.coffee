@@ -1,5 +1,5 @@
 class @TasksListBackend
-  fetchTasks: =>
+  fetchTasks: () =>
     request = $.get '/tasks.json',
       dataType: 'json'
     request.success (data) =>
@@ -17,16 +17,21 @@ class @TasksListBackend
     request.success =>
       @taskRemoved id
 
-  getPickedTask: =>
+  getPickedTask: () =>
     request = $.get '/tasks/getPicked',
       dataType: 'json'
     request.success (data) =>
-      if data.length == 0
-        @noPickedTaskFetched()
-      else
-        @fetchedPickedTask data
+      @fetchedPickedTask data
+    request.fail =>
+      @noPickedTaskFetched()
 
-  taskAdded: =>
+  markPickedTaskDone: () =>
+    request = $.ajax '/task/done',
+      'type': 'PUT'
+    request.done  =>
+      @markedPickedDone()
+
+  taskAdded: () =>
 
   tasksFetched: (tasks) =>
 
@@ -34,4 +39,6 @@ class @TasksListBackend
 
   fetchedPickedTask: (task) =>
 
-  noPickedTaskFetched: =>
+  noPickedTaskFetched
+
+  markedPickedDone: () =>
