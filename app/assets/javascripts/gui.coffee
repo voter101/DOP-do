@@ -9,9 +9,11 @@ class @Gui
 
   showTaskList: () =>
     tasks = @createElementFor("#Tasks")
+    taskPicker = @createElementFor("#TaskPicker")
     list = @createElementFor("#TasksListTemplate")
     form = @createElementFor("#TaskForm")
     $('.main').append(tasks)
+    $('.tasks').append(taskPicker)
     $('.tasks').append(list)
     $('.tasks').append(form)
     form.submit(@taskSubmit)
