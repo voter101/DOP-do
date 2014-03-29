@@ -1,19 +1,14 @@
 class @TasksListBackend
 
-  constructor: ->
-    @tasks = []
-
   getTasks: =>
     request = $.get '/tasks.json',
       dataType: 'json'
     request.success (data) =>
-      @tasks = data
-      @tasksFetched @tasks
+      @tasksFetched data
 
   addTask: (content) =>
     request = $.post '/tasks.json',
       'data': {content: content}
-    @tasks.add(task);
     @taskAdded task
 
   removeTask: (id) =>
