@@ -1,5 +1,6 @@
 class TasksService
   class TaskContentTooLongError < StandardError; end
+  class TaskSaveError < StandardError; end
 
   #attr_reader :user
 
@@ -14,6 +15,9 @@ class TasksService
     task.content = content
     #task.author = @user.id
     task.author = "123"
-    task.save
+
+    if !task.save
+      raise TaskSaveError.new
+    end
   end
 end
