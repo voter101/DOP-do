@@ -35,7 +35,7 @@ class @TasksListBackend
     request = $.get '/tasks/pick',
       'dataType': 'json'
     request.success (data) =>
-      @taskPicked task
+      @taskPicked data
 
   taskAdded: () =>
 
