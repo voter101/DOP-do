@@ -22,8 +22,8 @@ class @Gui
     taskSubmitForm.submit(@taskSubmit)
     $('.taskForm button').click( -> $('.taskForm').trigger('submit') )
     $('.tasksList').on('click', '.removeTask', @removeTaskClick)
-    $('.taskPicker').on('click', '.taskDone', @taskDoneClick)
-    $('.taskPicker').on('click', '.pickTask', @pickTaskClick)
+    $('.taskPick').on('click', '.taskDone', @taskDoneClick)
+    $('.taskPick').on('click', '.pickTask', @pickTaskClick)
 
   setTasks: (tasks) =>
     $('.tasksList').empty()
@@ -42,7 +42,7 @@ class @Gui
     $('.taskPick').append(element)
 
   setTaskPicker: () =>
-    element = @createElementFor('#TaskPicker', task)
+    element = @createElementFor('#TaskPicker')
     $('.taskPick').empty()
     $('.taskPick').append(element)
 
