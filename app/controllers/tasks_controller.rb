@@ -14,7 +14,7 @@ class TasksController < ApplicationController
 
   def show
     tasks = task_service.getAll()
-    render :json => Task.all
+    render :json => tasks
   end
 
   def showItem

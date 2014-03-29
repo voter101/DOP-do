@@ -52,11 +52,14 @@ class TasksService
       task.picked_by = @user
       task.save!
     end
+    return task
   end
 
   def getPicked()
     task = Task.where(picked_by: @user.id)
-    raise TaskNotPickedError.new unless !task.nil?
+    if task.empty?
+      raise TaskNotPickedError.new
+    end
     return task
   end
 
