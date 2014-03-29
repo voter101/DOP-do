@@ -25,11 +25,16 @@ class @Gui
     tasks.map((task) => @appendTask(task))
 
   appendTask: (task) =>
-    element = @createElementFor('#TaskTemplate', task)
+    element = @createElementFor('#TaskListTemplate', task)
     $('.tasksList').append(element)
 
   removeTask: (id) =>
     $('.tasksList .task[data-taskId=' + id + ']').slideUp()
+
+  setPickedTask: (task) =>
+    element = @createElementFor('#TaskPicked', task)
+    $('.taskPicker').empty()
+    $('.taskPicker').append(element)
 
   removeTaskClick: (event) =>
     id = $(event.target).attr('data-taskId')

@@ -1,6 +1,7 @@
 class @TasksList
   constructor: ->
     @tasks = []
+    @pickedTask = {}
 
   start: =>
 
@@ -16,8 +17,14 @@ class @TasksList
     )
     @removedTask id
 
+  setPickedTask: (task) =>
+    @pickedTask = new Task(task[0].id, task[0].content)
+    @pickedTaskSet @pickedTask
+
   fetchTasks: () =>
 
   tasksSetted: (tasks) =>
 
   removedTask: (id) =>
+
+  pickedTaskSet: (pickedTask) =>

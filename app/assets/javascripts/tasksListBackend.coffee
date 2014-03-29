@@ -1,5 +1,4 @@
 class @TasksListBackend
-
   fetchTasks: =>
     request = $.get '/tasks.json',
       dataType: 'json'
@@ -18,8 +17,21 @@ class @TasksListBackend
     request.success =>
       @taskRemoved id
 
+  getPickedTask: =>
+    request = $.get '/tasks/getPicked',
+      dataType: 'json'
+    request.success (data) =>
+      if data.length == 0
+        @noPickedTaskFetched()
+      else
+        @fetchedPickedTask data
+
   taskAdded: =>
 
   tasksFetched: (tasks) =>
 
   taskRemoved: (id) =>
+
+  fetchedPickedTask: (task) =>
+
+  noPickedTaskFetched: =>
