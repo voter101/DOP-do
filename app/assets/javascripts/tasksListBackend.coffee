@@ -1,6 +1,6 @@
 class @TasksListBackend
 
-  getTasks: =>
+  fetchTasks: =>
     request = $.get '/tasks.json',
       dataType: 'json'
     request.success (data) =>
@@ -9,13 +9,13 @@ class @TasksListBackend
   addTask: (content) =>
     request = $.post '/tasks.json',
       'data': {content: content}
-    @taskAdded task
+    request.done => @taskAdded
 
   removeTask: (id) =>
     @tasks.remove( (task) -> parseInt(task.id) == parseInt(id) )
     @taskRemoved id
 
-  taskAdded: (task) =>
+  taskAdded: =>
 
   tasksFetched: (tasks) =>
 

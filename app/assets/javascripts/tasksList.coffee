@@ -4,12 +4,11 @@ class @TasksList
 
   start: =>
 
-  addTask: (task) =>
-    @tasks[task.id] = task
-    @taskAdded task
-
-  taskAdded: (task) =>
-    return task;
+  setTasks: (tasks) =>
+    @tasks = tasks.map((task) ->
+      return new Task task.id task.content
+    )
+    @tasksSetted @tasks
 
   taskNotAdded: =>
     console.warn "Failed to add task"
@@ -19,5 +18,7 @@ class @TasksList
       parseInt(task.id) == parseInt(id)
     )
     @removedTask id
+
+  tasksSetted: (tasks) =>
 
   removedTask: (id) =>
