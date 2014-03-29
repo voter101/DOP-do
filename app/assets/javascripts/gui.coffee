@@ -9,17 +9,17 @@ class @Gui
 
   showTasksUI: () =>
     tasks = @createElementFor("#Tasks")
-    taskPick = @createElementFor("#TaskPicker")
+    taskPick = @createElementFor("#TaskPick")
     list = @createElementFor("#TasksListTemplate")
     form = @createElementFor("#TaskForm")
     $('.main').append(tasks)
     $('.tasks').append(taskPick)
     $('.tasks').append(list)
     $('.tasks').append(form)
-    @bindEvents()
+    @bindEvents(form)
 
-  bindEvents: () =>
-    form.submit(@taskSubmit)
+  bindEvents: (taskSubmitForm) =>
+    taskSubmitForm.submit(@taskSubmit)
     $('.taskForm button').click( -> $('.taskForm').trigger('submit') )
     $('.tasksList').on('click', '.removeTask', @removeTaskClick)
     $('.taskPicker').on('click', '.taskDone', @taskDoneClick)
