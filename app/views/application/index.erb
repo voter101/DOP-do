@@ -1,14 +1,14 @@
 <script type="x-handlebars-template" id="TasksListTemplate">
-    <div class="tasksList">
-    </div>
+    <ul class="tasksList list-group">
+    </ul>
 </script>
 
 <script type="x-handlebars-template" id="TaskTemplate">
-    <div data-taskId="{{id}}" class="task">
+    <li data-taskId="{{id}}" class="task list-group-item">
         <span class="taskId">{{id}}</span>
         <span class="taskDescription">{{content}}</span>
         <button data-taskId="{{id}}" class="removeTask">Remove</button>
-    </div>
+    </li>
 </script>
 
 <script type="x-handlebars-template" id="TaskForm">
