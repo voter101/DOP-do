@@ -21,4 +21,3 @@ class @TasksList
     @removedTask id
 
   removedTask: (id) =>
-
