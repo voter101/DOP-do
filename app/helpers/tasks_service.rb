@@ -42,7 +42,7 @@ class TasksService
     end
   end
 
-  def pickTask()
+  def pick()
     if taskPicked?
       return Task.where(picked_by: @user.id)
     end

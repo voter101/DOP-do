@@ -36,7 +36,7 @@ class TasksController < ApplicationController
   end
 
   def pick
-    render :json => task_service.pickTask()
+    render :json => task_service.pick()
   end
 
   private
