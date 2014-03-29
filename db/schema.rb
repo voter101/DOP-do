@@ -14,9 +14,10 @@
 ActiveRecord::Schema.define(version: 20140329044736) do
 
   create_table "tasks", force: true do |t|
-    t.string "content",               null: false
-    t.string "author",    limit: 128, null: false
-    t.string "picked_by", limit: 128
+    t.string  "content",                               null: false
+    t.string  "author",    limit: 128,                 null: false
+    t.string  "picked_by", limit: 128
+    t.boolean "done",                  default: false, null: false
   end
 
   create_table "users", force: true do |t|
