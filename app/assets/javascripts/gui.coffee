@@ -69,3 +69,5 @@ class @Gui
   taskSubmitted: (content) =>
 
   removeTaskClicked: (id) =>
+
+  pickTaskClicked: () =>
