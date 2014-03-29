@@ -1,6 +1,7 @@
 class TasksService
   class TaskContentTooLongError < StandardError; end
   class TaskSaveError < StandardError; end
+  class TaskNotFoundError < StandardError; end
   class TaskDestroyError < StandardError; end
 
   #attr_reader :user
@@ -20,6 +21,18 @@ class TasksService
     if !task.save
       raise TaskSaveError.new
     end
+  end
+
+  def get(id)
+    begin
+      Task.find(id)
+    rescue ActiveRecord::RecordNotFound
+      raise TaskNotFoundError.new
+    end
+  end
+
+  def getAll()
+    Task.all
   end
 
   def destroy(id)

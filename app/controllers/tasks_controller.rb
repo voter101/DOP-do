@@ -12,21 +12,22 @@ class TasksController < ApplicationController
   end
 
   def show
+    tasks = task_service.getAll()
     render :json => Task.all
   end
 
   def showItem
     begin
-      task = Task.find(params[:id])
+      task = task_service.get(params[:id])
       render :json => task
-    rescue ActiveRecord::RecordNotFound
+    rescue TaskNotFoundError
       render status: :not_found, :nothing => true
     end
   end
 
   def destroy
     begin
-      TasksService.destroy(params[:id])
+      task_service.destroy(params[:id])
     rescue TaskDestroyError
       render status: :forbidden, :nothing => true
     end
