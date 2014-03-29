@@ -17,9 +17,18 @@ class TasksController < ApplicationController
 
   def showItem
     begin
-      render :json => Task.find(params[:id])
+      task = Task.find(params[:id])
+      render :json => task
     rescue ActiveRecord::RecordNotFound
       render status: :not_found, :nothing => true
+    end
+  end
+
+  def destroy
+    begin
+      TasksService.delete(params[:id])
+    rescue TaskDestroyError
+      render status: :forbidden, :nothing => true
     end
   end
 
