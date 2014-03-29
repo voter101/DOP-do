@@ -34,3 +34,13 @@
 .taskForm {
   margin: 25px 0;
 }
+
+.task {
+  .removeTask {
+    border-radius: 2px;
+    cursor: pointer;
+  }
+  .removeTask:hover {
+    background: #3276b1;
+  }
+}
