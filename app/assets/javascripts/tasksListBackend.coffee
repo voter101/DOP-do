@@ -12,9 +12,7 @@ class @TasksListBackend
     @taskAdded task
 
   removeTask: (id) =>
-    @tasks.remove( (task) ->
-      parseInt(task.id) == parseInt(id)
-    )
+    @tasks.remove( (task) -> parseInt(task.id) == parseInt(id) )
     @taskRemoved id
 
   taskAdded: (task) =>
