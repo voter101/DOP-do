@@ -1,5 +1,5 @@
 class @Glue
-  constructor: (@useCase, @gui, @tasksBackend, @tasksOrdering)->
+  constructor: (@useCase, @gui, @tasksBackend)->
     After(@useCase, "start", () => @gui.showTaskList())
     After(@useCase, "start", () => @tasksBackend.fetchTasks())
 
