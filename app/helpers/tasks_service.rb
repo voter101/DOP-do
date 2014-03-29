@@ -48,16 +48,15 @@ class TasksService
       return pickedTask
     rescue TaskNotPickedError; end
 
-    task = Task.where(done: false).first
-    if (task.nil?)
-      raise TaskNoTasksError
-    end
-
-    task.with_lock do
-      task.picked_by = @user
+    Task.transaction do
+      task = Task.where(done: false).lock(true).first
+      if (task.nil?)
+        raise TaskNoTasksError
+      end
+      task.picked_by = @user.id
       task.save!
     end
-    return task
+    return getPicked
   end
 
   def markPickedAsDone()
