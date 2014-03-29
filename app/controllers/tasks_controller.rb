@@ -35,6 +35,10 @@ class TasksController < ApplicationController
     end
   end
 
+  def pick
+    render :json => task_service.pickTask()
+  end
+
   private
   def task_service
     TasksService.new(current_user)
