@@ -8,10 +8,12 @@ class @Gui
     element = $(html)
 
   showTaskList: () =>
+    tasks = @createElementFor("#Tasks")
     list = @createElementFor("#TasksListTemplate")
     form = @createElementFor("#TaskForm")
-    $('.main').append(list)
-    $('.main').append(form)
+    $('.main').append(tasks)
+    $('.tasks').append(list)
+    $('.tasks').append(form)
     form.submit(@taskSubmit)
     $('.tasksList').on('click', '.removeTask', @removeTaskClick)
 
