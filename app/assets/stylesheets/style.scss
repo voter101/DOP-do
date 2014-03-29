@@ -49,12 +49,18 @@
     max-width: 330px;
     padding-top: 2px;
   }
-  .removeTask {
-    border-radius: 2px;
-    cursor: pointer;
-    padding: 4px 6px;
-  }
-  .removeTask:hover {
-    background: #3276b1;
-  }
+}
+
+.taskPicker {
+  margin:10px 0 30px;
+}
+
+.pickTask, .taskDone, .removeTask {
+  border-radius: 2px;
+  cursor: pointer;
+  padding: 4px 6px;
+  margin-top:3px;
+}
+.pickTask, .taskDone:hover, .removeTask:hover {
+  background: #3276b1;
 }
