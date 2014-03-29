@@ -28,3 +28,5 @@ class @TasksList
   removedTask: (id) =>
 
   pickedTaskSet: (pickedTask) =>
+
+  markPickedDone: () =>

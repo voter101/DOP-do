@@ -6,7 +6,8 @@ class @Glue
     After(@useCase, "tasksSetted", (tasks) => @gui.setTasks(tasks))
     After(@useCase, "removedTask", (id) => @gui.removeTask(id))
     After(@useCase, "pickedTaskSet", (task) => @gui.setPickedTask(task))
-    After(@useCase, "markedPickedDone", () => @gui.setTaskPicker())
+    After(@useCase, "pickedTaskSet", () => @tasksBackend.fetchTasks())
+    After(@useCase, "markPickedDone", () => @gui.setTaskPicker())
 
     After(@tasksBackend, "tasksFetched", (tasks) => @useCase.setTasks(tasks))
     After(@tasksBackend, 'taskAdded', () => @tasksBackend.fetchTasks())
