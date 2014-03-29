@@ -43,8 +43,9 @@ class TasksService
   end
 
   def pick()
-    if taskPicked?
-      return Task.where(picked_by: @user.id)
+    picked = getPicked()
+    if !getPicked.nil?
+      return picked
     end
 
     task = Task.first
@@ -54,8 +55,8 @@ class TasksService
     end
   end
 
-  protected
-  def taskPicked?()
-    Task.where(picked_by: @user.id).count > 0
+  def getPicked()
+    return Task.where(picked_by: @user.id)
   end
+
 end
