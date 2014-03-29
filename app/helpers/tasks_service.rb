@@ -22,7 +22,7 @@ class TasksService
     end
   end
 
-  def delete(id)
+  def destroy(id)
     task = Task.find(id)
     task.destroy()
     if !task.destroyed?
