@@ -7,9 +7,10 @@ class @TasksListBackend
       @tasksFetched data
 
   addTask: (content) =>
-    request = $.post '/tasks.json',
+    request = $.post '/tasks',
       'data': {content: content}
-    request.done => @taskAdded
+    request.success =>
+      @taskAdded()
 
   removeTask: (id) =>
     @tasks.remove( (task) -> parseInt(task.id) == parseInt(id) )

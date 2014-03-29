@@ -6,7 +6,7 @@ class @TasksList
 
   setTasks: (tasks) =>
     @tasks = tasks.map((task) ->
-      return new Task task.id task.content
+      return new Task(task.id, task.content)
     )
     @tasksSetted @tasks
 
@@ -15,6 +15,8 @@ class @TasksList
       parseInt(task.id) == parseInt(id)
     )
     @removedTask id
+
+  fetchTasks: () =>
 
   tasksSetted: (tasks) =>
 
