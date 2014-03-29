@@ -18,7 +18,7 @@ class @TasksList
     @removedTask id
 
   setPickedTask: (task) =>
-    @pickedTask = new Task(task[0].id, task[0].content)
+    @pickedTask = new Task(task.id, task.content)
     @pickedTaskSet @pickedTask
 
   fetchTasks: () =>

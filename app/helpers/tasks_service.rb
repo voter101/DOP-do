@@ -62,7 +62,7 @@ class TasksService
   end
 
   def getPicked()
-    task = Task.where(picked_by: @user.id, done: 0)
+    task = Task.where(picked_by: @user.id, done: 0).first
     if task.empty?
       raise TaskNotPickedError.new
     end
