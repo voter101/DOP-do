@@ -32,7 +32,7 @@ class TasksService
   end
 
   def getAll()
-    Task.where("picked_by IS NULL")
+    Task.where(picked_by: nil, done: 0)
   end
 
   def destroy(id)
@@ -56,7 +56,7 @@ class TasksService
   end
 
   def getPicked()
-    task = Task.where(picked_by: @user.id)
+    task = Task.where(picked_by: @user.id, done: 0)
     if task.empty?
       raise TaskNotPickedError.new
     end
