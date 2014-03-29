@@ -47,7 +47,7 @@ class TasksService
       return pickedTask
     rescue TaskNotPickedError; end
 
-    task = Task.first
+    task = Task.where(done: false).first
     task.with_lock do
       task.picked_by = @user
       task.save!
