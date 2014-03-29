@@ -8,13 +8,12 @@
     </ul>
 </script>
 
-<script type="x-handlebars-template" id="TaskTemplate">
+<script type="x-handlebars-template" id="TaskListTemplate">
     <li data-taskId="{{id}}" class="task list-group-item">
         <span class="taskId">#{{id}}</span>
         <span class="taskDescription">{{content}}</span>
         <span data-taskId="{{id}}" class="badge removeTask">Remove</span>
     </li>
-
 </script>
 
 <script type="x-handlebars-template" id="TaskForm">
@@ -28,5 +27,13 @@
 
 <script type="x-handlebars-template" id="TaskPicker">
     <div class="taskPicker">
+    </div>
+</script>
+
+<script type="x-handlebars-template" id="TaskPicked">
+    <div data-taskId="{{id}}" class="task list-group-item">
+        <span class="taskId">#{{id}}</span>
+        <span class="taskDescription">{{content}}</span>
+        <span class="badge taskDone">Done</span>
     </div>
 </script>
