@@ -7,7 +7,7 @@ class TasksService
   #  @user = user
   #end
 
-  def addTask(content)
+  def add(content)
     raise TaskContentTooLongError.new unless content.length > 3 && content.length < 255
 
     task = Task.new

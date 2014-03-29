@@ -1,7 +1,7 @@
 class TasksController < ApplicationController
 
   def create
-    if task_service.addTask(params[:data][:content])
+    if task_service.add(params[:data][:content])
       render status: :created, :nothing => true
     else
       render status: :forbidden, :nothing => true
