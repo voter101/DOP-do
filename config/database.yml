@@ -11,10 +11,10 @@
 development:
   adapter: postgresql
   encoding: utf8
-  database: dop-do
+  database: DOP-do
   pool: 5
-  username: root
-  password: toor
+  username: voter101
+  password:
   socket: /var/run/mysqld/mysqld.sock
 
 # Warning: The database defined as "test" will be erased and
@@ -23,17 +23,17 @@ development:
 test:
   adapter: postgresql
   encoding: utf8
-  database: dop-do
+  database: DOP-do
   pool: 5
-  username: root
-  password: toor
+  username: voter101
+  password:
   socket: /var/run/mysqld/mysqld.sock
 
 production:
   adapter: postgresql
   encoding: utf8
-  database: dop-do
+  database: DOP-do
   pool: 5
-  username: root
-  password: toor
+  username: voter101
+  password:
   socket: /var/run/mysqld/mysqld.sock
