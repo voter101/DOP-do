@@ -22,6 +22,10 @@ class @Gui
     $('.tasksList').empty()
     tasks.map((task) => @appendTask(task))
 
+  appendTask: (task) =>
+    element = @createElementFor('#TaskTemplate', task)
+    $('.tasksList').append(element)
+
   removeTask: (id) =>
     $('.tasksList .task[data-taskId=' + id + ']').slideDown()
 
