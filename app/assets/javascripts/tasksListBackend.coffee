@@ -13,8 +13,10 @@ class @TasksListBackend
       @taskAdded()
 
   removeTask: (id) =>
-    @tasks.remove( (task) -> parseInt(task.id) == parseInt(id) )
-    @taskRemoved id
+    request = $.ajax '/tasks/' + id,
+      'type': 'DELETE'
+    request.success =>
+      @taskRemoved id
 
   taskAdded: =>
 
