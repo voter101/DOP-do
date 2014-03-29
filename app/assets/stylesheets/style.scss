@@ -37,9 +37,16 @@
 
 .task {
   .taskId {
-    font-size:18px;
+    font-size: 18px;
     margin-right: 10px;
     font-weight: bold;
+    display: inline-block;
+    vertical-align: top;
+  }
+  .taskDescription {
+    display: inline-block;
+    max-width: 330px;
+    padding-top:2px;
   }
   .removeTask {
     border-radius: 2px;
