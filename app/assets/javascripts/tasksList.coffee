@@ -10,9 +10,6 @@ class @TasksList
     )
     @tasksSetted @tasks
 
-  taskNotAdded: =>
-    console.warn "Failed to add task"
-
   removeTask: (id) =>
     @tasks.remove( (task) ->
       parseInt(task.id) == parseInt(id)
