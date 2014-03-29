@@ -48,6 +48,15 @@ class TasksController < ApplicationController
     end
   end
 
+  def markPickedAsDone
+    begin
+      task_service.markPickedAsDone()
+      render status: :ok, :nothing => true
+    rescue TasksService::TaskNotPickedError
+      render status: :not_found, :nothing => true
+    end
+  end
+
   private
   def task_service
     TasksService.new(current_user)
