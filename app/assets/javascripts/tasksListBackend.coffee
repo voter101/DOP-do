@@ -23,7 +23,7 @@ class @TasksListBackend
     request.success (data) =>
       @fetchedPickedTask data
     request.fail =>
-      @noPickedTaskFetched()
+      @noPickedTasks()
 
   markPickedTaskDone: () =>
     request = $.ajax '/task/done',
@@ -39,6 +39,6 @@ class @TasksListBackend
 
   fetchedPickedTask: (task) =>
 
-  noPickedTaskFetched
+  noPickedTasks: () =>
 
   markedPickedDone: () =>
