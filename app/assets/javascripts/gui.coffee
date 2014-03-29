@@ -9,16 +9,20 @@ class @Gui
 
   showTasksUI: () =>
     tasks = @createElementFor("#Tasks")
-    taskPicker = @createElementFor("#TaskPicker")
+    taskPick = @createElementFor("#TaskPicker")
     list = @createElementFor("#TasksListTemplate")
     form = @createElementFor("#TaskForm")
     $('.main').append(tasks)
-    $('.tasks').append(taskPicker)
+    $('.tasks').append(taskPick)
     $('.tasks').append(list)
     $('.tasks').append(form)
+    @bindEvents()
+
+  bindEvents: () =>
     form.submit(@taskSubmit)
     $('.taskForm button').click( -> $('.taskForm').trigger('submit') )
     $('.tasksList').on('click', '.removeTask', @removeTaskClick)
+    $('.taskPicker').on('click', '.taskDone', @taskDoneClick)
 
   setTasks: (tasks) =>
     $('.tasksList').empty()
@@ -33,8 +37,13 @@ class @Gui
 
   setPickedTask: (task) =>
     element = @createElementFor('#TaskPicked', task)
-    $('.taskPicker').empty()
-    $('.taskPicker').append(element)
+    $('.taskPick').empty()
+    $('.taskPick').append(element)
+
+  setTaskPicker: () =>
+    element = @createElementFor('#TaskPicker', task)
+    $('.taskPick').empty()
+    $('.taskPick').append(element)
 
   removeTaskClick: (event) =>
     id = $(event.target).attr('data-taskId')
@@ -47,6 +56,11 @@ class @Gui
     contentInput.val('');
     if content.length > 3
       @taskSubmitted content
+
+  taskDoneClick: (event) =>
+    @taskDoneClicked()
+
+  taskDoneClicked: () =>
 
   taskSubmitted: (content) =>
 
