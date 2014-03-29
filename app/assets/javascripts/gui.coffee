@@ -15,10 +15,11 @@ class @Gui
     $('.tasks').append(list)
     $('.tasks').append(form)
     form.submit(@taskSubmit)
+    $('.taskForm button').click( -> $('.taskForm').trigger('submit') )
     $('.tasksList').on('click', '.removeTask', @removeTaskClick)
 
   setTasks: (tasks) =>
-    $('.tasksList div').empty()
+    $('.tasksList').empty()
     tasks.map((task) => @appendTask(task))
 
   appendTask: (task) =>

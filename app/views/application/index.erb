@@ -14,11 +14,14 @@
         <span class="taskDescription">{{content}}</span>
         <button data-taskId="{{id}}" class="removeTask">Remove</button>
     </li>
+
 </script>
 
 <script type="x-handlebars-template" id="TaskForm">
-    <form action="#" class="taskForm">
-       <input type="text" name="content" />
-       <input type="submit" value="Send!" />
+    <form action="#" class="taskForm input-group">
+       <input class="form-control" type="text" name="content" />
+       <span class="input-group-btn">
+            <button class="btn btn-default" type="button">Send</button>
+       </span>
     </form>
 </script>
