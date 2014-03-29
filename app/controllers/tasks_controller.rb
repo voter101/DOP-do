@@ -4,9 +4,9 @@ class TasksController < ApplicationController
     begin
       task_service.add(params[:data][:content])
       render status: :created, :nothing => true
-    rescue TaskContentTooLongError
+    rescue TasksService::TaskContentTooLongError
       render status: :bad_request, :nothing => true
-    rescue TaskSaveError
+    rescue TasksService::TaskSaveError
       render status: :forbidden, :nothing => true
     end
   end
@@ -20,7 +20,7 @@ class TasksController < ApplicationController
     begin
       task = task_service.get(params[:id])
       render :json => task
-    rescue TaskNotFoundError
+    rescue TasksService::TaskNotFoundError
       render status: :not_found, :nothing => true
     end
   end
@@ -29,7 +29,7 @@ class TasksController < ApplicationController
     begin
       task_service.destroy(params[:id])
       render status: :ok, :nothing => true
-    rescue TaskDestroyError
+    rescue TasksService::TaskDestroyError
       render status: :forbidden, :nothing => true
     end
   end
