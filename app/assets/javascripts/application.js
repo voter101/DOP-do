@@ -11,8 +11,11 @@
 // about supported directives.
 //
 //= require jquery
+//= require ../../../vendor/assets/javascripts/handlebars
 //= require ../../../vendor/assets/javascripts/underscore
+//= require ../../../vendor/assets/javascripts/YouAreDaChef
+//= require ../../../vendor/assets/javascripts/YouAreDaBomb
+//= require_tree .
 //= require_tree ../../../vendor/assets/javascripts/
-//= require app
 
-new App()c
+new App()

@@ -1,2 +1,19 @@
-<div class="main">
-</div>
+<script type="x-handlebars-template" id="TasksListTemplate">
+    <div class="tasksList">
+    </div>
+</script>
+
+<script type="x-handlebars-template" id="TaskTemplate">
+    <div data-taskId="{{id}}" class="task">
+        <span class="taskId">{{id}}</span>
+        <span class="taskDescription">{{content}}</span>
+        <button data-taskId="{{id}}" class="removeTask">Remove</button>
+    </div>
+</script>
+
+<script type="x-handlebars-template" id="TaskForm">
+    <form action="#" class="taskForm">
+       <input type="text" name="content" />
+       <input type="submit" value="Send!" />
+    </form>
+</script>
