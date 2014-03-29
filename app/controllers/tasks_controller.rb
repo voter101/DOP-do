@@ -1,9 +1,12 @@
 class TasksController < ApplicationController
 
   def create
-    if task_service.add(params[:data][:content])
+    begin
+      task_service.add(params[:data][:content])
       render status: :created, :nothing => true
-    else
+    rescue TaskContentTooLongError
+      render status: :bad_request, :nothing => true
+    rescue TaskSaveError
       render status: :forbidden, :nothing => true
     end
   end
@@ -13,7 +16,11 @@ class TasksController < ApplicationController
   end
 
   def showItem
-    render :json => Task.find(params[:id])
+    begin
+      render :json => Task.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      render status: :not_found, :nothing => true
+    end
   end
 
   private
