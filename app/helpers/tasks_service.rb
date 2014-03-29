@@ -4,19 +4,18 @@ class TasksService
   class TaskNotFoundError < StandardError; end
   class TaskDestroyError < StandardError; end
 
-  #attr_reader :user
+  attr_reader :user
 
-  #def initialize(user)
-  #  @user = user
-  #end
+  def initialize(user)
+    @user = user
+  end
 
   def add(content)
     raise TaskContentTooLongError.new unless content.length > 3 && content.length < 255
 
     task = Task.new
     task.content = content
-    #task.author = @user.id
-    task.author = "123"
+    task.author = @user.id
 
     if !task.save
       raise TaskSaveError.new

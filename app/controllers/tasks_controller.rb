@@ -36,7 +36,7 @@ class TasksController < ApplicationController
 
   private
   def task_service
-    TasksService.new()
+    TasksService.new(current_user)
   end
 
 end
