@@ -38,17 +38,14 @@ class TasksService
   def destroy(id)
     task = Task.find(id)
     task.destroy()
-    if !task.destroyed?
-      raise TaskDestroyError.new
-    end
+    raise TaskDestroyError.new unless task.destroyed?
   end
 
   def pick()
     begin
       pickedTask = getPicked()
       return pickedTask
-    rescue TaskAlreadyPickedError
-    end
+    rescue TaskAlreadyPickedError; end
 
     task = Task.first
     task.with_lock do
@@ -59,9 +56,8 @@ class TasksService
 
   def getPicked()
     task = Task.where(picked_by: @user.id)
-    if task.nil?
-      raise TaskAlreadyPickedError.new
-    end
+    raise TaskAlreadyPickedError.new unless !task.nil?
+    return task
   end
 
 end
