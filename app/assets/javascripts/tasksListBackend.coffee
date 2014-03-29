@@ -3,6 +3,7 @@ class @TasksListBackend
     request = $.get '/tasks.json',
       dataType: 'json'
     request.success (data) =>
+      data.map((task) -> new Task(task.id, task.content))
       @tasksFetched data
 
   addTask: (content) =>
@@ -21,7 +22,7 @@ class @TasksListBackend
     request = $.get '/tasks/getPicked',
       dataType: 'json'
     request.success (data) =>
-      @fetchedPickedTask data
+      @fetchedPickedTask (new Task(data.id, data.content))
     request.fail =>
       @noPickedTasks()
 
@@ -35,7 +36,7 @@ class @TasksListBackend
     request = $.get '/tasks/pick',
       'dataType': 'json'
     request.success (data) =>
-      @taskPicked data
+      @taskPicked (new Task(data.id, data.content))
 
   taskAdded: () =>
 
