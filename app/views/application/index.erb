@@ -3,17 +3,21 @@
     </div>
 </script>
 
-<script type="x-handlebars-template" id="TasksListTemplate">
+<script type="x-handlebars-template" id="TasksList">
     <ul class="tasksList list-group">
     </ul>
 </script>
 
-<script type="x-handlebars-template" id="TaskListTemplate">
+<script type="x-handlebars-template" id="TaskListElement">
     <li data-taskId="{{id}}" class="task list-group-item">
         <span class="taskId">#{{id}}</span>
         <span class="taskDescription">{{content}}</span>
         <span data-taskId="{{id}}" class="badge removeTask">Remove</span>
     </li>
+</script>
+
+<script type="x-handlebars-template" id="TasksListEmpty">
+    <div class="lead">No more tasks to pick. :)</div>
 </script>
 
 <script type="x-handlebars-template" id="TaskForm">

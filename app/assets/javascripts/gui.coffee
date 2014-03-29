@@ -10,7 +10,7 @@ class @Gui
   showTasksUI: () =>
     tasks = @createElementFor("#Tasks")
     taskPick = @createElementFor("#TaskPick")
-    list = @createElementFor("#TasksListTemplate")
+    list = @createElementFor("#TasksList")
     form = @createElementFor("#TaskForm")
     $('.main').append(tasks)
     $('.tasks').append(taskPick)
@@ -27,10 +27,14 @@ class @Gui
 
   setTasks: (tasks) =>
     $('.tasksList').empty()
-    tasks.map((task) => @appendTask(task))
+    if tasks.length > 0
+      tasks.map((task) => @appendTask(task))
+    else
+      element = @createElementFor("#TasksListEmpty")
+      $('.tasksList').append(element)
 
   appendTask: (task) =>
-    element = @createElementFor('#TaskListTemplate', task)
+    element = @createElementFor('#TaskListElement', task)
     $('.tasksList').append(element)
 
   removeTask: (id) =>
