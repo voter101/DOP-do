@@ -26,7 +26,7 @@ class TasksService
     task = Task.find(id)
     task.destroy()
     if !task.destroyed?
-      raise TaskDestroyError
+      raise TaskDestroyError.new
     end
   end
 end
