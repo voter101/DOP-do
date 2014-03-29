@@ -18,4 +18,4 @@
 //= require_tree .
 //= require_tree ../../../vendor/assets/javascripts/
 
-new App()
+new App();
