@@ -45,7 +45,9 @@ class TasksController < ApplicationController
   def markPickedAsDone
     task_service.markPickedAsDone()
     render status: :ok, :nothing => true
-  rescue TasksService::TaskNotPickedError
+  rescue TasksService::NoTaskPickedError
+    render status: :not_found, :nothing => true
+  rescue TasksService::TaskSaveError
     render status: :not_found, :nothing => true
   end
 
