@@ -2,14 +2,12 @@ class TasksController < ApplicationController
   before_filter :authenticate_user!
 
   def create
-    begin
-      task_service.add(params[:data][:content])
-      render status: :created, :nothing => true
-    rescue TasksService::TaskContentTooLongError
-      render status: :bad_request, :nothing => true
-    rescue TasksService::TaskSaveError
-      render status: :forbidden, :nothing => true
-    end
+    task_service.add(params[:data][:content])
+    render status: :created, :nothing => true
+  rescue TasksService::TaskContentTooLongError
+    render status: :bad_request, :nothing => true
+  rescue TasksService::TaskSaveError
+    render status: :forbidden, :nothing => true
   end
 
   def show
@@ -18,47 +16,37 @@ class TasksController < ApplicationController
   end
 
   def showItem
-    begin
-      task = task_service.getTask(params[:id])
-      render :json => task
-    rescue TasksService::TaskNotFoundError
-      render status: :not_found, :nothing => true
-    end
+    task = task_service.getTask(params[:id])
+    render :json => task
+  rescue TasksService::TaskNotFoundError
+    render status: :not_found, :nothing => true
   end
 
   def destroy
-    begin
-      task_service.destroy(params[:id])
-      render status: :ok, :nothing => true
-    rescue TasksService::TaskDestroyError
-      render status: :forbidden, :nothing => true
-    end
+    task_service.destroy(params[:id])
+    render status: :ok, :nothing => true
+  rescue TasksService::TaskDestroyError
+    render status: :forbidden, :nothing => true
   end
 
   def pick
-    begin
-      render :json => task_service.pick()
-    rescue TasksService::TaskNoTasksError
-      render status: :not_found, :nothing => true
-    end
+    render :json => task_service.pick()
+  rescue TasksService::TaskNoTasksError
+    render status: :not_found, :nothing => true
   end
 
   def getPicked
-    begin
-      task = task_service.getPicked()
-      render :json => task
-    rescue TasksService::TaskNotPickedError
-      render status: :not_found, :nothing => true
-    end
+    task = task_service.getPicked()
+    render :json => task
+  rescue TasksService::TaskNotPickedError
+    render status: :not_found, :nothing => true
   end
 
   def markPickedAsDone
-    begin
-      task_service.markPickedAsDone()
-      render status: :ok, :nothing => true
-    rescue TasksService::TaskNotPickedError
-      render status: :not_found, :nothing => true
-    end
+    task_service.markPickedAsDone()
+    render status: :ok, :nothing => true
+  rescue TasksService::TaskNotPickedError
+    render status: :not_found, :nothing => true
   end
 
   private
