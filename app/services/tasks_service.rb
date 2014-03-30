@@ -34,9 +34,9 @@ class TasksService
   end
 
   def destroy(id)
-    task = Task.find(id)
-    task.destroy()
-    raise TaskDestroyError.new unless task.destroyed?
+    @taskRepository.destroy(id)
+  rescue TasksRepository::TaskDestroyError
+    raise TaskDestroyError
   end
 
   def pick()
