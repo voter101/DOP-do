@@ -10,18 +10,15 @@ class TasksService
 
   def initialize(user, taskRepository)
     @user = user
+    @taskRepository = taskRepository
   end
 
   def add(content)
-    raise TaskContentTooLongError.new unless content.length > 3 && content.length < 255
-
-    task = Task.new
-    task.content = content
-    task.author = @user.id
-
-    if !task.save
-      raise TaskSaveError.new
-    end
+    @taskRepository.add(content, @user.id)
+  rescue TasksValidator::TaskContentTooLongError
+    raise TaskContentTooLongError.new
+  rescue TasksRepository::TaskSaveError
+    raise TaskSaveError.new
   end
 
   def get(id)
