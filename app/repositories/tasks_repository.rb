@@ -1,6 +1,10 @@
 class TasksRepository
-  class TaskSaveError < StandardError; end
-  class TaskDestroyError < StandardError; end
+  class TaskSaveError < StandardError;
+  end
+  class TaskDestroyError < StandardError;
+  end
+  class NoTasksError < StandardError;
+  end
 
   attr_accessor :validator
 
@@ -30,6 +34,26 @@ class TasksRepository
     task = Task.find(id)
     task.destroy()
     raise TaskDestroyError.new unless task.destroyed?
+  end
+
+  def pickTask(userId)
+    pickedTask = getPickedTask(userId)
+    if pickedTask.nil?
+      Task.transaction do
+        task = Task.where(done: false).lock(true).first
+        if (task.nil?)
+          raise NoTasksError.new
+        end
+        task.picked_by = userId
+        task.save
+        pickedTask = task
+      end
+    end
+    return pickedTask
+  end
+
+  def getPickedTask(userId)
+    Task.where(picked_by: userId, done: false).first
   end
 
 end

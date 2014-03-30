@@ -31,7 +31,7 @@ class TasksController < ApplicationController
 
   def pick
     render :json => task_service.pick()
-  rescue TasksService::TaskNoTasksError
+  rescue TasksService::NoTasksError
     render status: :not_found, :nothing => true
   end
 

@@ -4,7 +4,7 @@ class TasksService
   class TaskNotFoundError < StandardError; end
   class TaskDestroyError < StandardError; end
   class TaskNotPickedError < StandardError; end
-  class TaskNoTasksError < StandardError; end
+  class NoTasksError < StandardError; end
 
   attr_reader :user, :taskRepository
 
@@ -40,20 +40,9 @@ class TasksService
   end
 
   def pick
-    begin
-      pickedTask = getPicked()
-      return pickedTask
-    rescue TaskNotPickedError; end
-
-    Task.transaction do
-      task = Task.where(done: false).lock(true).first
-      if (task.nil?)
-        raise TaskNoTasksError
-      end
-      task.picked_by = @user.id
-      task.save!
-    end
-    return getPicked
+    @taskRepository.pickTask(@user.id)
+  rescue TasksRepository::NoTasksError
+    raise NoTasksError
   end
 
   def markPickedAsDone
@@ -63,11 +52,7 @@ class TasksService
   end
 
   def getPicked
-    task = Task.where(picked_by: @user.id, done: false).first
-    if task.nil?
-      raise TaskNotPickedError.new
-    end
-    return task
+    @taskRepository.getPickedTask(@user.id)
   end
 
 end
