@@ -21,4 +21,8 @@ class TasksRepository
     Task.find(id)
   end
 
+  def getAll
+    Task.where(picked_by: nil, done: false)
+  end
+
 end

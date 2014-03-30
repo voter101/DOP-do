@@ -28,7 +28,9 @@ class TasksService
   end
 
   def getAll()
-    Task.where(picked_by: nil, done: false)
+    @taskRepository.getAll
+  rescue ActiveRecord::RecordNotFound
+    raise TaskNotFoundError.new
   end
 
   def destroy(id)
