@@ -8,7 +8,7 @@ DOPDo::Application.routes.draw do
   get '/tasks/getPicked', to: 'tasks#getPicked'
 
   get '/tasks/:id', to: 'tasks#showItem'
-  get '/tasks', to: 'tasks#show'
+  get '/tasks', to: 'tasks#showAll'
   delete '/tasks/:id', to: 'tasks#destroy'
   post '/tasks', to: 'tasks#create'
 

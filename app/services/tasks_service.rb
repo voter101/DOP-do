@@ -21,7 +21,7 @@ class TasksService
     raise TaskSaveError.new
   end
 
-  def getTask(id)
+  def getItem(id)
     @taskRepository.getTask(id)
   rescue ActiveRecord::RecordNotFound
     raise TaskNotFoundError.new

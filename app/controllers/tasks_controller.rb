@@ -10,13 +10,13 @@ class TasksController < ApplicationController
     render status: :forbidden, :nothing => true
   end
 
-  def show
+  def showAll
     tasks = task_service.getAll()
     render :json => tasks
   end
 
   def showItem
-    task = task_service.getTask(params[:id])
+    task = task_service.getItem(params[:id])
     render :json => task
   rescue TasksService::TaskNotFoundError
     render status: :not_found, :nothing => true
