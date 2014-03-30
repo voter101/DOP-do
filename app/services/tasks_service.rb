@@ -56,13 +56,13 @@ class TasksService
     return getPicked
   end
 
-  def markPickedAsDone()
+  def markPickedAsDone
     pickedTask = getPicked()
     pickedTask.done = true
     pickedTask.save
   end
 
-  def getPicked()
+  def getPicked
     task = Task.where(picked_by: @user.id, done: false).first
     if task.nil?
       raise TaskNotPickedError.new
