@@ -21,12 +21,10 @@ class TasksService
     raise TaskSaveError.new
   end
 
-  def get(id)
-    begin
-      Task.find(id)
-    rescue ActiveRecord::RecordNotFound
-      raise TaskNotFoundError.new
-    end
+  def getTask(id)
+    @taskRepository.getTask(id)
+  rescue ActiveRecord::RecordNotFound
+    raise TaskNotFoundError.new
   end
 
   def getAll()

@@ -19,7 +19,7 @@ class TasksController < ApplicationController
 
   def showItem
     begin
-      task = task_service.get(params[:id])
+      task = task_service.getTask(params[:id])
       render :json => task
     rescue TasksService::TaskNotFoundError
       render status: :not_found, :nothing => true

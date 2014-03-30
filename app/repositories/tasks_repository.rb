@@ -17,4 +17,8 @@ class TasksRepository
     end
   end
 
+  def getTask(id)
+    Task.find(id)
+  end
+
 end
