@@ -5,9 +5,9 @@ class TasksController < ApplicationController
     begin
       task_service.add(params[:data][:content])
       render status: :created, :nothing => true
-    rescue TasksService::TaskContentTooLongError
+    rescue Tasks::TaskContentTooLongError
       render status: :bad_request, :nothing => true
-    rescue TasksService::TaskSaveError
+    rescue Tasks::TaskSaveError
       render status: :forbidden, :nothing => true
     end
   end
@@ -63,7 +63,9 @@ class TasksController < ApplicationController
 
   private
   def task_service
-    TasksService.new(current_user)
+    validator = new TasksValidator()
+    repository = new TasksRepository(validator)
+    TasksService.new(current_user, repository)
   end
 
 end

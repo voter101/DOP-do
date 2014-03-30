@@ -1,4 +1,4 @@
-class Tasks
+class TasksService
   class TaskContentTooLongError < StandardError; end
   class TaskSaveError < StandardError; end
   class TaskNotFoundError < StandardError; end
@@ -6,9 +6,9 @@ class Tasks
   class TaskNotPickedError < StandardError; end
   class TaskNoTasksError < StandardError; end
 
-  attr_reader :user
+  attr_reader :user, :taskRepository
 
-  def initialize(user)
+  def initialize(user, taskRepository)
     @user = user
   end
 
