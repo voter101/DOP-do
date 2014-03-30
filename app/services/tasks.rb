@@ -1,4 +1,4 @@
-class TasksService
+class Tasks
   class TaskContentTooLongError < StandardError; end
   class TaskSaveError < StandardError; end
   class TaskNotFoundError < StandardError; end
