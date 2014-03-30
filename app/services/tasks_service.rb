@@ -27,7 +27,7 @@ class TasksService
     raise TaskNotFoundError.new
   end
 
-  def getAll()
+  def getAll
     @taskRepository.getAll
   rescue ActiveRecord::RecordNotFound
     raise TaskNotFoundError.new
@@ -39,7 +39,7 @@ class TasksService
     raise TaskDestroyError
   end
 
-  def pick()
+  def pick
     begin
       pickedTask = getPicked()
       return pickedTask
