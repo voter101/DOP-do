@@ -10,13 +10,13 @@ class TasksController < ApplicationController
     render status: :forbidden, :nothing => true
   end
 
-  def showAll
-    tasks = task_service.getAll()
+  def get_all
+    tasks = task_service.get_all
     render :json => tasks
   end
 
-  def showItem
-    task = task_service.getItem(params[:id])
+  def get
+    task = task_service.get(params[:id])
     render :json => task
   rescue TasksService::TaskNotFoundError
     render status: :not_found, :nothing => true
@@ -30,20 +30,20 @@ class TasksController < ApplicationController
   end
 
   def pick
-    render :json => task_service.pick()
+    render :json => task_service.pick
   rescue TasksService::NoTasksError
     render status: :not_found, :nothing => true
   end
 
-  def getPicked
-    task = task_service.getPicked()
+  def get_picked
+    task = task_service.get_picked
     render :json => task
   rescue TasksService::TaskNotPickedError
     render status: :not_found, :nothing => true
   end
 
-  def markPickedAsDone
-    task_service.markPickedAsDone()
+  def mark_picked_done
+    task_service.mark_picked_done
     render status: :ok, :nothing => true
   rescue TasksService::NoTaskPickedError
     render status: :not_found, :nothing => true

@@ -21,14 +21,14 @@ class TasksService
     raise TaskSaveError.new
   end
 
-  def getItem(id)
-    @taskRepository.getTask(id)
+  def get(id)
+    @taskRepository.get(id)
   rescue ActiveRecord::RecordNotFound
     raise TaskNotFoundError.new
   end
 
-  def getAll
-    @taskRepository.getAll
+  def get_all
+    @taskRepository.get_all
   rescue ActiveRecord::RecordNotFound
     raise TaskNotFoundError.new
   end
@@ -40,21 +40,21 @@ class TasksService
   end
 
   def pick
-    @taskRepository.pickTask(@user.id)
+    @taskRepository.pick(@user.id)
   rescue TasksRepository::NoTasksError
     raise NoTasksError
   end
 
-  def markPickedAsDone
-    if !@taskRepository.markPickedTaskDone(@user.id)
+  def mark_picked_done
+    if !@taskRepository.mark_picked_done(@user.id)
       raise TaskSaveError.new
     end
   rescue TasksRepository::NoTaskPickedError
     raise NoTaskPickedError.new
   end
 
-  def getPicked
-    task = @taskRepository.getPickedTask(@user.id)
+  def get_picked
+    task = @taskRepository.get_picked(@user.id)
     if task.nil?
       raise TaskNotPickedError.new
     end

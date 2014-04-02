@@ -14,17 +14,17 @@ class TasksRepository
     task = Task.new
     task.content = content
     task.author = userId
-    @validator.validateTask (task)
+    @validator.validate_task (task)
     if !task.save
       raise TaskSaveError.new
     end
   end
 
-  def getTask(id)
+  def get(id)
     Task.find(id)
   end
 
-  def getAll
+  def get_all
     Task.where(picked_by: nil, done: false)
   end
 
@@ -34,9 +34,9 @@ class TasksRepository
     raise TaskDestroyError.new unless task.destroyed?
   end
 
-  def pickTask(userId)
-    pickedTask = getPickedTask(userId)
-    if pickedTask.nil?
+  def pick(userId)
+    task = get_picked(userId)
+    if task.nil?
       Task.transaction do
         task = Task.where(done: false).lock(true).first
         if (task.nil?)
@@ -44,14 +44,13 @@ class TasksRepository
         end
         task.picked_by = userId
         task.save
-        pickedTask = task
       end
     end
-    return pickedTask
+    return task
   end
 
-  def markPickedTaskDone(userId)
-    task = getPickedTask(userId)
+  def mark_picked_done(userId)
+    task = get_picked(userId)
     if task.nil?
       raise NoTaskPickedError.new
     end
@@ -59,7 +58,7 @@ class TasksRepository
     task.save
   end
 
-  def getPickedTask(userId)
+  def get_picked(userId)
     Task.where(picked_by: userId, done: false).first
   end
 

@@ -19,7 +19,7 @@ class @TasksListBackend
       @taskRemoved id
 
   getPickedTask: () =>
-    request = $.get '/tasks/getPicked',
+    request = $.get '/tasks/picked',
       dataType: 'json'
     request.success (data) =>
       @fetchedPickedTask (new Task(data.id, data.content))
@@ -27,7 +27,7 @@ class @TasksListBackend
       @noPickedTasks()
 
   markPickedTaskDone: () =>
-    request = $.ajax '/tasks/done',
+    request = $.ajax '/tasks/picked/done',
       'type': 'PUT'
     request.done  =>
       @markedPickedDone()
