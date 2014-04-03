@@ -13,7 +13,7 @@ class @Glue
     After(@tasksBackend, 'taskAdded', () => @tasksBackend.fetchTasks())
     After(@tasksBackend, 'taskRemoved', (id) => @useCase.removeTask(id))
     After(@tasksBackend, 'fetchedPickedTask', (task) => @useCase.setPickedTask(task))
-    After(@tasksBackend, 'noPickedTasks', () => @gui.setTaskPicker())
+    After(@tasksBackend, 'noTaskPicked', () => @gui.setTaskPicker())
     After(@tasksBackend, 'markedPickedDone', () => @useCase.markPickedDone())
     After(@tasksBackend, 'taskPicked', (task) => @useCase.setPickedTask(task))
 

@@ -21,10 +21,13 @@ class @TasksListBackend
   getPickedTask: () =>
     request = $.get '/tasks/picked',
       dataType: 'json'
-    request.success (data) =>
-      @fetchedPickedTask (new Task(data.id, data.content))
-    request.fail =>
-      @noPickedTasks()
+    request.done (data, textStatus, jqXHR) =>
+        if jqXHR.status != 200
+            @noTaskPicked()
+        else
+            @fetchedPickedTask(new Task(data.id, data.content))
+    request.fail () =>
+        @noTaskPicked()
 
   markPickedTaskDone: () =>
     request = $.ajax '/tasks/picked/done',
@@ -46,7 +49,7 @@ class @TasksListBackend
 
   fetchedPickedTask: (task) =>
 
-  noPickedTasks: () =>
+  noTaskPicked: () =>
 
   markedPickedDone: () =>
 
