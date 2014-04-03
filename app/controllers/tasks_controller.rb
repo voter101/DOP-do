@@ -63,7 +63,6 @@ class TasksController < ApplicationController
 
  private
  def task_picking_service
-   TaskPickingService(current_user, task_repository)
+   TaskPickingService.new(current_user, task_repository)
  end
-
 end
