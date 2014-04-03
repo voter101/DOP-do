@@ -11,16 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define() do
+ActiveRecord::Schema.define(version: 20140329044736) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "tasks", force: true do |t|
-    t.string "content", null: false
-    t.string "author", limit: 128, null: false
+    t.string  "content",                               null: false
+    t.string  "author",    limit: 128,                 null: false
     t.integer "picked_by"
-    t.boolean "done", default: false, null: false
+    t.boolean "done",                  default: false, null: false
   end
 
   create_table "users", force: true do |t|

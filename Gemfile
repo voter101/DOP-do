@@ -30,8 +30,10 @@ gem 'jbuilder', '~> 1.2'
 # Auth system
 gem 'devise', '~> 3.2.4'
 
-# Tests
-gem 'rspec-rails', '~> 2.14.2'
+group :development, :test do
+  gem 'rspec-rails', '~> 2.14.2'
+  gem 'shoulda-matchers'
+end
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
