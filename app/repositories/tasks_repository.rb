@@ -4,7 +4,7 @@ class TasksRepository
 
 
   def add (task)
-    return task.save
+    task.save
   end
 
   def get(id)
@@ -16,41 +16,38 @@ class TasksRepository
   end
 
   def get_unpicked
-    task = Task.where(done: false).lock(true).first
+    Task.where(done: false).lock(true).first
   end
 
   def destroy(id)
     task = get(id)
-    task.destroy()
-    return task.destroyed?
+    task.destroy
+    task.destroyed?
   end
 
-  def pick(userId)
-    task = get_picked(userId)
+  def pick(user_id)
+    task = get_picked(user_id)
     if task.nil?
       Task.transaction do
         task = get_unpicked
-        if task.nil?
-          raise NoTasksError.new
-        end
-        task.picked_by = userId
+        raise NoTasksError.new if task.nil?
+        task.picked_by = user_id
         task.save
       end
     end
-    return task
+
+    task
   end
 
-  def mark_picked_done(userId)
-    task = get_picked(userId)
-    if task.nil?
-      raise NoTaskPickedError.new
-    end
+  def mark_picked_done(user_id)
+    task = get_picked(user_id)
+    raise NoTaskPickedError.new if task.nil?
     task.done = true
     task.save
   end
 
-  def get_picked(userId)
-    Task.where(picked_by: userId, done: false).first
+  def get_picked(user_id)
+    Task.where(picked_by: user_id, done: false).first
   end
 
 end
