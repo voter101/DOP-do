@@ -54,8 +54,8 @@ class TasksController < ApplicationController
   private
   def task_service
     validator = TasksValidator.new
-    repository = TasksRepository.new(validator)
-    TasksService.new(current_user, repository)
+    repository = TasksRepository.new
+    TasksService.new(current_user, repository, validator)
   end
 
 end

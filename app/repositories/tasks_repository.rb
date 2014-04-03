@@ -1,23 +1,10 @@
 class TasksRepository
-  class TaskSaveError < StandardError;  end
-  class TaskDestroyError < StandardError;  end
-  class NoTasksError < StandardError;  end
-  class NoTaskPickedError < StandardError;  end
+  class NoTasksError < StandardError; end
+  class NoTaskPickedError < StandardError; end
 
-  attr_accessor :validator
 
-  def initialize (validator)
-    @validator = validator
-  end
-
-  def add (content, userId)
-    task = Task.new
-    task.content = content
-    task.author = userId
-    @validator.validate_task (task)
-    if !task.save
-      raise TaskSaveError.new
-    end
+  def add (task)
+    return task.save
   end
 
   def get(id)
@@ -28,18 +15,22 @@ class TasksRepository
     Task.where(picked_by: nil, done: false)
   end
 
+  def get_unpicked
+    task = Task.where(done: false).lock(true).first
+  end
+
   def destroy(id)
-    task = Task.find(id)
+    task = get(id)
     task.destroy()
-    raise TaskDestroyError.new unless task.destroyed?
+    return task.destroyed?
   end
 
   def pick(userId)
     task = get_picked(userId)
     if task.nil?
       Task.transaction do
-        task = Task.where(done: false).lock(true).first
-        if (task.nil?)
+        task = get_unpicked
+        if task.nil?
           raise NoTasksError.new
         end
         task.picked_by = userId

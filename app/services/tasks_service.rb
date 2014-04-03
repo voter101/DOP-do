@@ -1,63 +1,57 @@
 class TasksService
-  class TaskContentTooLongError < StandardError; end
-  class TaskSaveError < StandardError; end
+  class ContentTooLongError < StandardError; end
+  class SaveError < StandardError; end
   class TaskNotFoundError < StandardError; end
   class TaskDestroyError < StandardError; end
   class NoTaskPickedError < StandardError; end
   class NoTasksError < StandardError; end
 
-  attr_reader :user, :taskRepository
+  attr_reader :user, :repository, :validator
 
-  def initialize(user, taskRepository)
+  def initialize(user, taskRepository, taskValidator)
     @user = user
-    @taskRepository = taskRepository
+    @repository = taskRepository
+    @validator = taskValidator
   end
 
   def add(content)
-    @taskRepository.add(content, @user.id)
-  rescue TasksValidator::TaskContentTooLongError
-    raise TaskContentTooLongError.new
-  rescue TasksRepository::TaskSaveError
-    raise TaskSaveError.new
+    task = Task.new
+    task.content = content
+    task.author = user.id
+    raise SaveError unless @repository.add(task)
+  rescue TasksValidator::ContentTooLongError
+    raise ContentTooLongError.new
   end
 
   def get(id)
-    @taskRepository.get(id)
-  rescue ActiveRecord::RecordNotFound
-    raise TaskNotFoundError.new
+    result = @repository.get(id)
+    raise TaskNotFoundError if result.nil?
+    return result
   end
 
   def get_all
-    @taskRepository.get_all
-  rescue ActiveRecord::RecordNotFound
-    raise TaskNotFoundError.new
+    @repository.get_all
   end
 
   def destroy(id)
-    @taskRepository.destroy(id)
-  rescue TasksRepository::TaskDestroyError
-    raise TaskDestroyError
+    raise TaskDestroyError unless @repository.destroy(id)
   end
 
   def pick
-    @taskRepository.pick(@user.id)
+    @repository.pick(@user.id)
   rescue TasksRepository::NoTasksError
     raise NoTasksError
   end
 
   def mark_picked_done
-    if !@taskRepository.mark_picked_done(@user.id)
-      raise TaskSaveError.new
-    end
+    raise TaskSaveError unless @repository.mark_picked_done(@user.id)
   rescue TasksRepository::NoTaskPickedError
     raise NoTaskPickedError.new
   end
 
   def get_picked
-    task = @taskRepository.get_picked(@user.id)
-    if task.nil?
-      raise TaskNotPickedError.new
-    end
+    task = @repository.get_picked(@user.id)
+    raise TaskNotPickedError.new if task.nil?
     task
   end
 
