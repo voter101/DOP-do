@@ -3,8 +3,6 @@ class TasksManagementService
   class SaveError < StandardError; end
   class TaskNotFoundError < StandardError; end
   class TaskDestroyError < StandardError; end
-  class NoTaskPickedError < StandardError; end
-  class NoTasksError < StandardError; end
 
   attr_reader :user, :repository, :validator
 
@@ -36,23 +34,4 @@ class TasksManagementService
   def destroy(id)
     raise TaskDestroyError unless @repository.destroy(id)
   end
-
-  def pick
-    @repository.pick(@user.id)
-  rescue TasksRepository::NoTasksError
-    raise NoTasksError
-  end
-
-  def mark_picked_done
-    raise SaveError unless @repository.mark_picked_done(@user.id)
-  rescue TasksRepository::NoTaskPickedError
-    raise NoTaskPickedError.new
-  end
-
-  def get_picked
-    task = @repository.get_picked(@user.id)
-    raise NoTaskPickedError.new if task.nil?
-    task
-  end
-
 end
