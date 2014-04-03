@@ -4,9 +4,9 @@ class TasksController < ApplicationController
   def create
     task_service.add(params[:data][:content])
     render status: :created, :nothing => true
-  rescue TasksService::TaskContentTooLongError
+  rescue TasksService::ContentTooLongError
     render status: :bad_request, :nothing => true
-  rescue TasksService::TaskSaveError
+  rescue TasksService::SaveError
     render status: :forbidden, :nothing => true
   end
 
@@ -19,7 +19,7 @@ class TasksController < ApplicationController
     task = task_service.get(params[:id])
     render :json => task
   rescue TasksService::TaskNotFoundError
-    render status: :not_found, :nothing => true
+    render status: :no_content, :nothing => true
   end
 
   def destroy
@@ -32,23 +32,23 @@ class TasksController < ApplicationController
   def pick
     render :json => task_service.pick
   rescue TasksService::NoTasksError
-    render status: :not_found, :nothing => true
+    render status: :no_content, :nothing => true
   end
 
   def get_picked
     task = task_service.get_picked
     render :json => task
-  rescue TasksService::TaskNotPickedError
-    render status: :not_found, :nothing => true
+  rescue TasksService::NoTaskPickedError
+    render status: :no_content, :nothing => true
   end
 
   def mark_picked_done
     task_service.mark_picked_done
     render status: :ok, :nothing => true
   rescue TasksService::NoTaskPickedError
-    render status: :not_found, :nothing => true
-  rescue TasksService::TaskSaveError
-    render status: :not_found, :nothing => true
+    render status: :no_content, :nothing => true
+  rescue TasksService::SaveError
+    render status: :internal_server_error, :nothing => true
   end
 
   private
