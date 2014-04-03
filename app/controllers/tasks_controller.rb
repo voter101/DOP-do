@@ -4,9 +4,9 @@ class TasksController < ApplicationController
   def create
     task_service.add(params[:data][:content])
     render status: :created, :nothing => true
-  rescue TasksService::ContentTooLongError
+  rescue TasksManagementService::ContentTooLongError
     render status: :bad_request, :nothing => true
-  rescue TasksService::SaveError
+  rescue TasksManagementService::SaveError
     render status: :forbidden, :nothing => true
   end
 
@@ -18,36 +18,36 @@ class TasksController < ApplicationController
   def get
     task = task_service.get(params[:id])
     render :json => task
-  rescue TasksService::TaskNotFoundError
+  rescue TasksManagementService::TaskNotFoundError
     render status: :no_content, :nothing => true
   end
 
   def destroy
     task_service.destroy(params[:id])
     render status: :ok, :nothing => true
-  rescue TasksService::TaskDestroyError
+  rescue TasksManagementService::TaskDestroyError
     render status: :forbidden, :nothing => true
   end
 
   def pick
     render :json => task_service.pick
-  rescue TasksService::NoTasksError
+  rescue TasksManagementService::NoTasksError
     render status: :no_content, :nothing => true
   end
 
   def get_picked
     task = task_service.get_picked
     render :json => task
-  rescue TasksService::NoTaskPickedError
+  rescue TasksManagementService::NoTaskPickedError
     render status: :no_content, :nothing => true
   end
 
   def mark_picked_done
     task_service.mark_picked_done
     render status: :ok, :nothing => true
-  rescue TasksService::NoTaskPickedError
+  rescue TasksManagementService::NoTaskPickedError
     render status: :no_content, :nothing => true
-  rescue TasksService::SaveError
+  rescue TasksManagementService::SaveError
     render status: :internal_server_error, :nothing => true
   end
 
@@ -55,7 +55,7 @@ class TasksController < ApplicationController
   def task_service
     validator = TasksValidator.new
     repository = TasksRepository.new
-    TasksService.new(current_user, repository, validator)
+    TasksManagementService.new(current_user, repository, validator)
   end
 
 end
