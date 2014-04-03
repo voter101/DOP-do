@@ -22,10 +22,8 @@ class @TasksListBackend
     request = $.get '/tasks/picked',
       dataType: 'json'
     request.done (data, textStatus, jqXHR) =>
-        if jqXHR.status != 200
-            @noTaskPicked()
-        else
-            @fetchedPickedTask(new Task(data.id, data.content))
+      return @noTaskPicked() unless jqXHR.status == 200
+      @fetchedPickedTask(new Task(data.id, data.content))
     request.fail () =>
         @noTaskPicked()
 
