@@ -8,10 +8,10 @@ class TasksService
 
   attr_reader :user, :repository, :validator
 
-  def initialize(user, taskRepository, taskValidator)
+  def initialize(user, task_repository, task_validator)
     @user = user
-    @repository = taskRepository
-    @validator = taskValidator
+    @repository = task_repository
+    @validator = task_validator
   end
 
   def add(content)
@@ -26,7 +26,7 @@ class TasksService
   def get(id)
     result = @repository.get(id)
     raise TaskNotFoundError if result.nil?
-    return result
+    result
   end
 
   def get_all
@@ -44,14 +44,14 @@ class TasksService
   end
 
   def mark_picked_done
-    raise TaskSaveError unless @repository.mark_picked_done(@user.id)
+    raise SaveError unless @repository.mark_picked_done(@user.id)
   rescue TasksRepository::NoTaskPickedError
     raise NoTaskPickedError.new
   end
 
   def get_picked
     task = @repository.get_picked(@user.id)
-    raise TaskNotPickedError.new if task.nil?
+    raise NoTaskPickedError.new if task.nil?
     task
   end
 
