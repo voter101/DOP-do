@@ -18,5 +18,8 @@ config/database.yml
 /log/*.log
 /tmp
 
+# Assets
+public/assets
+
 # Rubymine
 /.idea
