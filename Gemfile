@@ -33,6 +33,7 @@ gem 'devise', '~> 3.2.4'
 group :development, :test do
   gem 'rspec-rails', '~> 2.14.2'
   gem 'shoulda-matchers'
+  gem 'factory_girl_rails', '~> 4.4.1'
 end
 
 group :doc do
