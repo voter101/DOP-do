@@ -2,7 +2,6 @@ class TasksRepository
   class NoTasksError < StandardError; end
   class NoTaskPickedError < StandardError; end
 
-
   def add (task)
     task.save
   end
@@ -49,5 +48,4 @@ class TasksRepository
   def get_picked(user_id)
     Task.where(picked_by: user_id, done: false).first
   end
-
 end
