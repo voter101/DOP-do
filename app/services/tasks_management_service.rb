@@ -4,12 +4,11 @@ class TasksManagementService
   class TaskNotFoundError < StandardError; end
   class TaskDestroyError < StandardError; end
 
-  attr_reader :user, :repository, :validator
+  attr_reader :user, :repository
 
-  def initialize(user, task_repository, task_validator)
+  def initialize(user, task_repository)
     @user = user
     @repository = task_repository
-    @validator = task_validator
   end
 
   def add(content)

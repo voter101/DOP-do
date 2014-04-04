@@ -32,8 +32,7 @@ class TasksController < ApplicationController
   private
   def task_management_service
     task_repository = TasksRepository.new
-    validator = TasksValidator.new
-    TasksManagementService.new(current_user, task_repository, validator)
+    TasksManagementService.new(current_user, task_repository)
   end
 
 end
