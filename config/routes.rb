@@ -3,9 +3,9 @@ DOPDo::Application.routes.draw do
 
   root 'application#index'
 
-  get '/tasks/pick', to: 'tasks#pick'
-  put '/tasks/picked/done', to: 'tasks#mark_picked_done'
-  get '/tasks/picked', to: 'tasks#get_picked'
+  get '/tasks/pick', to: 'task_picker#pick'
+  put '/tasks/picked/done', to: 'task_picker#mark_picked_done'
+  get '/tasks/picked', to: 'task_picker#get_picked'
 
   get '/tasks/:id', to: 'tasks#get'
   get '/tasks', to: 'tasks#get_all'
